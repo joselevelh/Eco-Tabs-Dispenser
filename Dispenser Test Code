@@ -1,0 +1,53 @@
+int val=0;
+#include <JeeLib.h>// https://github.com/jeelabs/jeelib.git low power functions library
+
+ISR(WDT_vect){    // start watchdog event
+  Sleepy::watchdogEvent(); 
+  }
+bool state= false;// black
+bool wow=false;
+void setup() {
+ Serial.begin(9600);
+ analogReference(EXTERNAL);
+ pinMode(10,OUTPUT);//to emitter resistor(470)
+ pinMode(12,OUTPUT);// Input L293D
+ pinMode(11,OUTPUT);//Enable L293D
+ pinMode(A4,INPUT);// Input for sensor
+ digitalWrite(11,HIGH);
+ digitalWrite(12,HIGH);
+ digitalWrite(10,HIGH);
+// digitalWrite(9,HIGH);
+}
+
+void loop() {
+
+ val = analogRead(A4);
+ Serial.println(val);
+// all above is always on
+
+
+
+digitalWrite(11,HIGH);
+digitalWrite(13,HIGH);// changed emitter from 10-13
+//digitalWrite(12,HIGH);
+if(val<=600)
+  state= true;// white
+if(state){
+  if( val>=800){
+    state=false;//black
+    digitalWrite(11,LOW);//turn off motor driver
+    digitalWrite(13,LOW);//turn off emitter    //changed emitter from 10-13
+   // digitalWrite(12,LOW);// turn off in for driver
+   Serial.println("get LOW");
+    Sleepy::loseSomeTime(10000);
+   // delay(3000);//time till next drop 
+  }
+}
+if( wow==false){
+digitalWrite(11,HIGH);
+delay(5000);
+digitalWrite(11,LOW);
+wow= true;
+}
+
+}
