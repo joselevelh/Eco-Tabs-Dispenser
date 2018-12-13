@@ -13,23 +13,20 @@ void setup() {
  pinMode(10,OUTPUT);//Both inputs of L293D
  pinMode(11,OUTPUT);//Enable L293D
  pinMode(12,OUTPUT);// 5v to L293D logic
- pinMode(A4,INPUT);// Input for sensor
+ pinMode(A4,INPUT);// Input from sensor
  
- 
- digitalWrite(11,HIGH);
  digitalWrite(12,HIGH);
+ digitalWrite(11,HIGH);
  digitalWrite(10,HIGH);
  digitalWrite(9,HIGH);
 }
-
+// all above is always on
 void loop() {
 
  val = analogRead(A4);
  Serial.println(val);
-// all above is always on
 
-
-
+//digitalWrite(12,HIGH);
 digitalWrite(11,HIGH);
 digitalWrite(9,HIGH);// Turn on emitter
 if(val<=600)
@@ -37,11 +34,11 @@ if(val<=600)
 if(state){
   if( val>=800){
     state=false;//black
-    digitalWrite(12,LOW);//turn off L293D Logic
     digitalWrite(11,LOW);//turn off motor driver
-    digitalWrite(9,LOW);//turn off emitter    
+    digitalWrite(9,LOW);//turn off emitter   
+    //digitalWrite(12,LOW);//turn off L293D Logic 
     Serial.println("get LOW");
-    Sleepy::loseSomeTime(10000);//delay by 10s
+    Sleepy::loseSomeTime(5000);//delay by 10s
     
   }
 }
