@@ -12,6 +12,7 @@ void setup() {
  pinMode(9,OUTPUT);// To emitter
  pinMode(10,OUTPUT);//Both inputs of L293D
  pinMode(11,OUTPUT);//Enable L293D
+ pinMode(12,OUTPUT);// 5v to L293D logic
  pinMode(A4,INPUT);// Input for sensor
  
  
@@ -36,6 +37,7 @@ if(val<=600)
 if(state){
   if( val>=800){
     state=false;//black
+    digitalWrite(12,LOW);//turn off L293D Logic
     digitalWrite(11,LOW);//turn off motor driver
     digitalWrite(9,LOW);//turn off emitter    
     Serial.println("get LOW");
