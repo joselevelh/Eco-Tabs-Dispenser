@@ -28,7 +28,7 @@ void loop() {
 
 
 digitalWrite(11,HIGH);
-digitalWrite(13,HIGH);// changed emitter from 10-13
+digitalWrite(9,HIGH);// turn on emitter
 //digitalWrite(12,HIGH);
 if(val<=600)
   state= true;// white
@@ -36,11 +36,11 @@ if(state){
   if( val>=800){
     state=false;//black
     digitalWrite(11,LOW);//turn off motor driver
-    digitalWrite(13,LOW);//turn off emitter    //changed emitter from 10-13
+    digitalWrite(9,LOW);//turn off emitter   
    // digitalWrite(12,LOW);// turn off in for driver
    Serial.println("get LOW");
     Sleepy::loseSomeTime(10000);
-   // delay(3000);//time till next drop 
+   // delay(3000);//time till next drop in ms
   }
 }
 if( wow==false){
