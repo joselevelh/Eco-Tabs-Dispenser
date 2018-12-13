@@ -9,14 +9,16 @@ bool wow=false;
 void setup() {
  Serial.begin(9600);
  analogReference(EXTERNAL);
- pinMode(10,OUTPUT);//to emitter resistor(470)
- pinMode(12,OUTPUT);// Input L293D
+ pinMode(9,OUTPUT);// To emitter
+ pinMode(10,OUTPUT);//Both inputs of L293D
  pinMode(11,OUTPUT);//Enable L293D
  pinMode(A4,INPUT);// Input for sensor
+ 
+ 
  digitalWrite(11,HIGH);
  digitalWrite(12,HIGH);
  digitalWrite(10,HIGH);
-// digitalWrite(9,HIGH);
+ digitalWrite(9,HIGH);
 }
 
 void loop() {
@@ -28,19 +30,17 @@ void loop() {
 
 
 digitalWrite(11,HIGH);
-digitalWrite(9,HIGH);// turn on emitter
-//digitalWrite(12,HIGH);
+digitalWrite(9,HIGH);// Turn on emitter
 if(val<=600)
   state= true;// white
 if(state){
   if( val>=800){
     state=false;//black
     digitalWrite(11,LOW);//turn off motor driver
-    digitalWrite(9,LOW);//turn off emitter   
-   // digitalWrite(12,LOW);// turn off in for driver
-   Serial.println("get LOW");
-    Sleepy::loseSomeTime(10000);
-   // delay(3000);//time till next drop in ms
+    digitalWrite(9,LOW);//turn off emitter    
+    Serial.println("get LOW");
+    Sleepy::loseSomeTime(10000);//delay by 10s
+    
   }
 }
 if( wow==false){
