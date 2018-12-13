@@ -26,7 +26,7 @@ void loop() {
  val = analogRead(A4);
  Serial.println(val);
 
-//digitalWrite(12,HIGH);
+digitalWrite(12,HIGH);
 digitalWrite(11,HIGH);
 digitalWrite(9,HIGH);// Turn on emitter
 if(val<=600)
@@ -34,11 +34,11 @@ if(val<=600)
 if(state){
   if( val>=800){
     state=false;//black
-    digitalWrite(11,LOW);//turn off motor driver
+    digitalWrite(11,LOW);//Turn off motor driver
     digitalWrite(9,LOW);//turn off emitter   
-    //digitalWrite(12,LOW);//turn off L293D Logic 
+    digitalWrite(12,LOW);//Turn off L293D Logic 
     Serial.println("get LOW");
-    Sleepy::loseSomeTime(5000);//delay by 10s
+    Sleepy::loseSomeTime(5000);//Delay by 10s
     
   }
 }
