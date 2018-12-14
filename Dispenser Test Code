@@ -5,7 +5,7 @@ ISR(WDT_vect){    // start watchdog event
   Sleepy::watchdogEvent(); 
   }
 bool state= false;// black
-bool wow=false;
+
 void setup() {
  Serial.begin(9600);
  analogReference(EXTERNAL);
@@ -41,12 +41,6 @@ if(state){
     Sleepy::loseSomeTime(5000);//Delay by 10s
     
   }
-}
-if( wow==false){
-digitalWrite(11,HIGH);
-delay(5000);
-digitalWrite(11,LOW);
-wow= true;
 }
 
 }
