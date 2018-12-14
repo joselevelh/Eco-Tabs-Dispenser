@@ -29,24 +29,20 @@ void loop() {
 digitalWrite(12,HIGH);
 digitalWrite(11,HIGH);
 digitalWrite(9,HIGH);// Turn on emitter
+digitalWrite(10,HIGH);// wally strikes again
+delay(2000);//wally says it will work now
 if(val<=600)
   state= true;// white
 if(state){
   if( val>=800){
     state=false;//black
     digitalWrite(11,LOW);//Turn off motor driver
-    digitalWrite(9,LOW);//turn off emitter   
+    digitalWrite(9,LOW);//turn off emitter
+    digitalWrite(10,LOW);//wally added this when you left 
     digitalWrite(12,LOW);//Turn off L293D Logic 
     Serial.println("get LOW");
     Sleepy::loseSomeTime(5000);//Delay by 10s
     
   }
 }
-if( wow==false){
-digitalWrite(11,HIGH);
-delay(5000);
-digitalWrite(11,LOW);
-wow= true;
-}
-
 }
